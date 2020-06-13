@@ -14,7 +14,7 @@ class Action {
     Control.getCanvas().addEventListener('mousedown', (event) => {
 
       const cursor = this.getCursorPosition(canvas, event);
-      quadro.cursor = cursor;
+      quadro.cursor.push(cursor);
 
       switch (quadro.tipoObj) {
         case "Linha":
@@ -31,12 +31,8 @@ class Action {
       
     }, false);
 
-    Control.getCanvas().addEventListener('mousemove', (event) => {
-
-      const cursor = this.getCursorPosition(canvas, event);
-      quadro.lastCursor = cursor;
-
-    }, false);
+    // Control.getCanvas().addEventListener('mousemove', (event) => {
+    // }, false);
 
     Control.getTfColor().addEventListener('input', (event) => {
       quadro.color = event.target.value;
@@ -44,11 +40,13 @@ class Action {
 
     Control.getBtPrev().addEventListener('click', () => {
       quadro.tipoObj = Quadrado.name;
+      quadro.cursor = [];
       this.refreshSpan(quadro);
     });
 
     Control.getBtNext().addEventListener('click', () => {
       quadro.tipoObj = Linha.name;
+      quadro.cursor = [];
       this.refreshSpan(quadro);
     });
 
